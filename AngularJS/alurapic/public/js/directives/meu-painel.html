@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+        <div class="panel-heading">
+                <h3 class="panel-title">{{titulo}}</h3>
+        </div>
+        <!-- utilizamos a diretiva ng-transclude --> 
+        <!-- isso informa ao angular que o objeto filho da diretiva 'meu-painel' que está definido no HTML da view -->
+        <!-- deve ser inserido dentro deste div -->
+        <div class="panel-body" ng-transclude></div>
+</div>

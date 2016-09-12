@@ -9,39 +9,18 @@
         <script type="text/javascript" src="js/lib/angular.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/controllers/fotos-controller.js"></script>
+        <script type="text/javascript" src="js/directives/minhas-diretivas.js"></script>
     </head>
     <body ng-controller='FotosController'>
         <div class="container">
             <div class="jumbotron">
                 <h1 class="text-center">Alurapic</h1>
             </div>
-            
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{foto.titulo}}</h3>
-                </div>
-                <div class="panel-body">
-                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                </div>
-            </div> <!-- fim do panel -->
-            
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{foto.titulo}}</h3>
-                </div>
-                <div class="panel-body">
-                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                </div>
-            </div> <!-- fim do panel -->
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{foto.titulo}}</h3>
-                </div>
-                <div class="panel-body">
-                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                </div>
-            </div> <!-- fim do panel -->
+            <!-- loop de paineis -->
+            <!-- foreach in $scope.fotos utilizando a diretiva ng-repeat -->
+            <meu-painel ng-repeat="foto in fotos" titulo="{{foto.titulo}}">
+                <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+            </meu-painel>
         </div> <!-- fim container -->        
     </body>
 </html>
