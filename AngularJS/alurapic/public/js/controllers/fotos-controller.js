@@ -7,6 +7,8 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
 	// o $scope é utilizado para que a view tenha acesso a essa lista
 	$scope.fotos = [];
 
+	$scope.filtro = '';
+
 	// faz uma requisição assíncrona utilizando o método .get para carregar dados do servidor
 	// $http devolve uma promisse 
 	// vai executar a função de callback passada no then quando tiver sucesso na requisição
