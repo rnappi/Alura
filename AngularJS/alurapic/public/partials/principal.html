@@ -1,0 +1,29 @@
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a href="fotos/new" class="btn btn-primary">Nova fotos</a>
+                </span>
+                
+                <!-- a diretiva ng-model cria o two way data bind -->
+                <!-- ela busca a propriedade filtro no controller e atualiza o seu valor conforme o conteúdo do input -->
+                <input ng-model="filtro" ng-model-options="{debounce:500}" class="form-control" placeholder="filtrar">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <!-- loop de paineis -->
+    <!-- foreach in $scope.fotos utilizando a diretiva ng-repeat -->
+    <!-- o | filter: filtro faz com o seja aplicado um filtro pelo valor da propriedade filtro que está declarada no controller -->
+    <!-- o filtro busca em todas as propriedades do objeto foto o valor digitado no input -->
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">
+        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+    </meu-painel>
+</div>
