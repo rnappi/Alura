@@ -17,7 +17,13 @@ angular.module("alurapic", ['minhasDiretivas', 'ngAnimate', 'ngRoute'])
 	});
 
 	$routeProvider.when('/fotos/new', {
-		templateUrl: 'partials/foto.html'
+		templateUrl: 'partials/foto.html',
+		controller: 'FotoController'
+	});
+
+	$routeProvider.when('/fotos/edit/:fotoId', {
+		templateUrl: 'partials/foto.html',
+		controller: 'FotoController'
 	});
 
 	// rota padrão da aplicação

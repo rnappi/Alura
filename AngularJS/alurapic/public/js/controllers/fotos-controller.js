@@ -9,6 +9,8 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
 
 	$scope.filtro = '';
 
+	$scope.menssagem = '';
+
 	// faz uma requisição assíncrona utilizando o método .get para carregar dados do servidor
 	// $http devolve uma promisse 
 	// vai executar a função de callback passada no then quando tiver sucesso na requisição
@@ -32,4 +34,17 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
 	.error(function(error){
 		console.log(error);
 	});
+
+	$scope.remover = function(foto){
+		$http.delete('v1/fotos/' + foto._id)
+		.success(function(){
+			var indiceFoto = $scope.fotos.indexOf(foto);
+			$scope.fotos.splice(indiceFoto, 1);
+			$scope.menssagem = 'Foto ' + foto.titulo + ' foi removida com sucesso';
+		})
+		.error(function(erro){
+			console.log(erro);
+			$scope.menssagem = 'Não foi possível remover a foto ' + foto.titulo;
+		});
+	};
 });

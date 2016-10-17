@@ -58,3 +58,15 @@ angular.module('minhasDiretivas', [])
 	// retorna a diretiva e suas configurações
 	return ddo;
 });
+
+angular.module('minhasDiretivas').directive('minhaFoto', function(){
+	var ddo = {};
+	ddo.restrict = 'E';
+	ddo.scope = {
+		url: '@',
+		titulo: '@'
+	};
+	ddo.transclude = false;
+	ddo.template = '<img class="img-responsive center-block" src="{{url}}" alt="{{titulo}}">';
+	return ddo;
+});
