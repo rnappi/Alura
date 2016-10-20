@@ -70,3 +70,16 @@ angular.module('minhasDiretivas').directive('minhaFoto', function(){
 	ddo.template = '<img class="img-responsive center-block" src="{{url}}" alt="{{titulo}}">';
 	return ddo;
 });
+
+angular.module('minhasDiretivas').directive('meuBotaoPerigo', function(){
+	var ddo = {};
+	ddo.restrict = 'E';
+	ddo.scope = {
+		// & quer dizer que estamos recebendo a referência de uma função que está sendo implementada no controller
+		// @ quer dizer que estamos recebendo uma string por valor, não uma referência para uma expressão/função
+		acao: '&',
+		nome: '@'
+	};
+	ddo.template = '<button ng-click="acao(foto)" class="btn btn-danger btn-block">{{nome}}</button>'
+	return ddo;
+});

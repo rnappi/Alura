@@ -1,7 +1,7 @@
 // é necessário passar o parametro '[]' para criar um módulo
 // este array '[]' serve para informar ao Angular quais são as dependências deste módulo
 // essas dependências são outros módulos que são utilizados pelo 'alurapic'
-angular.module("alurapic", ['minhasDiretivas', 'ngAnimate', 'ngRoute'])
+angular.module("alurapic", ['minhasDiretivas', 'ngAnimate', 'ngRoute', 'meusServicos'])
 .config(function($routeProvider, $locationProvider){
 	
 	// configura o Angular para retirar o # das rotas e utilizar o history API do HTML5

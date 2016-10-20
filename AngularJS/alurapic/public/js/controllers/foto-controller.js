@@ -1,7 +1,8 @@
-angular.module('alurapic').controller('FotoController', function($scope, $http, $routeParams){
+angular.module('alurapic').controller('FotoController', function($scope, cadastroDeFotos, $routeParams){
 	$scope.foto = {};
 	$scope.mensagem = '';
 
+	/*
 	// $routeParams nos dá acesso aos parâmetros passados na url através da rota
 	if ($routeParams.fotoId) {
 		$http.get('v1/fotos/' + $routeParams.fotoId)
@@ -38,6 +39,30 @@ angular.module('alurapic').controller('FotoController', function($scope, $http, 
 					console.log(error);
 				});					
 			}		
+		}
+	};
+	*/
+
+	// $routeParams nos dá acesso aos parâmetros passados na url através da rota
+	if ($routeParams.fotoId) {
+		recursoFoto.get({fotoId: $routeParams.fotoId}, function(foto){
+			$scope.foto = foto;
+		}, function(erro){
+			console.log(erro);
+			$scope.menssagem = 'Não foi possível obetr a foto';			
+		});
+	}
+
+	$scope.submeter = function(){
+		if ($scope.formulario.$valid) {
+			cadastroDeFotos.cadastrar($scope.foto)
+			.then(function(dados){
+				$scope.mensagem = dados.mensagem;
+				if (dados.inclusao) $scope.foto = {};
+			})
+			.catch(function(dados){
+				$scope.mensagem = dados.mensagem;
+			});		
 		}
 	};
 });
