@@ -83,3 +83,32 @@ angular.module('minhasDiretivas').directive('meuBotaoPerigo', function(){
 	ddo.template = '<button ng-click="acao(foto)" class="btn btn-danger btn-block">{{nome}}</button>'
 	return ddo;
 });
+
+angular.module('minhasDiretivas').directive('meuFocus', function(){
+	var ddo = {};
+	ddo.restrict = 'A';
+	ddo.scope = {
+		// '=' perite que as alterações na propriedade seja refletida tanto no cntroller quanto na diretiva
+		// usamos '=' porque se trata de uma propriedade com comunicação bi-direcional
+		focado: '='
+	};
+
+	// link é uma fase do angular que é executada logo após a fase de compile
+	// nesta fase, temos acesso ao scope da diretiva e o element do DOM em que a diretiva esta sendo aplicada
+	// só conseguimos adicionar watchers nas propriedades nesta fase
+	ddo.link = function(scope, element){
+		// watch recebe o nome da propriedade do scopo da diretiva que vai ser monitorada
+		// e recebe a função que será executada todas as vezes que a propriedade for alterada
+		scope.$watch('focado', function(){
+			if (scope.focado) {
+				// não estamos utilizando o focus do jQuery
+				// o Angular utiliza o jqLight que não possui a função focus
+				// por isso, estamos aplicando o focus nativo do javascript diretamente no elemento do DOM (element[0])
+				element[0].focus();
+				scope.focado = false;
+			}
+		});
+	}
+
+	return ddo;
+});
