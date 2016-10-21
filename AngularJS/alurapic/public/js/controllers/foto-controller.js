@@ -49,7 +49,7 @@ angular.module('alurapic').controller('FotoController', function($scope, cadastr
 			$scope.foto = foto;
 		}, function(erro){
 			console.log(erro);
-			$scope.menssagem = 'Não foi possível obetr a foto';			
+			$scope.menssagem = 'Não foi possível obetr a foto';
 		});
 	}
 
@@ -59,11 +59,10 @@ angular.module('alurapic').controller('FotoController', function($scope, cadastr
 			.then(function(dados){
 				$scope.mensagem = dados.mensagem;
 				if (dados.inclusao) $scope.foto = {};
-				$scope.focado = true;
 			})
 			.catch(function(dados){
 				$scope.mensagem = dados.mensagem;
-			});		
+			});
 		}
 	};
 });

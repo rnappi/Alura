@@ -1,5 +1,5 @@
 // cria o módulo chamado minhasDiretivas
-angular.module('minhasDiretivas', [])
+angular.module('minhasDiretivas', ['meusServicos'])
 // cria uma diretiva dentro do módulo 'minhasDiretivas'
 // Toda diretiva deve retornar um ddo (Directive Definition Object)
 // este objeto é o responsável pela configuração da diretiva
@@ -87,18 +87,24 @@ angular.module('minhasDiretivas').directive('meuBotaoPerigo', function(){
 angular.module('minhasDiretivas').directive('meuFocus', function(){
 	var ddo = {};
 	ddo.restrict = 'A';
+	
+	/*
 	ddo.scope = {
 		// '=' perite que as alterações na propriedade seja refletida tanto no cntroller quanto na diretiva
 		// usamos '=' porque se trata de uma propriedade com comunicação bi-direcional
 		focado: '='
 	};
+	*/
 
 	// link é uma fase do angular que é executada logo após a fase de compile
 	// nesta fase, temos acesso ao scope da diretiva e o element do DOM em que a diretiva esta sendo aplicada
 	// só conseguimos adicionar watchers nas propriedades nesta fase
 	ddo.link = function(scope, element){
+		/*
 		// watch recebe o nome da propriedade do scopo da diretiva que vai ser monitorada
 		// e recebe a função que será executada todas as vezes que a propriedade for alterada
+		// com o watch, podemos receber o valor atual e o valor antes da mudança como parametro
+		// ex: scope.$watch('focado', function(novoValor, valorAntigo){});
 		scope.$watch('focado', function(){
 			if (scope.focado) {
 				// não estamos utilizando o focus do jQuery
@@ -108,7 +114,28 @@ angular.module('minhasDiretivas').directive('meuFocus', function(){
 				scope.focado = false;
 			}
 		});
+		*/
+
+		// fazendo a mesma coisa utilizando o gerenciador de eventos do Angular
+		// vamos utilizar o evento fotoCadastrada que está sendo disparado no controller responsável pelo cadastramento da foto
+		scope.$on('fotoCadastrada', function(){
+			element[0].focus();
+		});
 	}
 
+	return ddo;
+});
+
+angular.module('alurapic').directive('meusTitulos', function(){
+	var ddo = {};
+	ddo.restrict = 'E';
+	ddo.template = '<ul><li ng-repeat="titulo in titulos">{{titulo}}</li></ul>';
+	ddo.controller = function($scope, recursoFoto){
+		recursoFoto.query(function(fotos){
+			$scope.titulos = fotos.map(function(foto){
+				return foto.titulo;
+			});
+		});
+	};
 	return ddo;
 });

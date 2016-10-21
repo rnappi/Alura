@@ -14,8 +14,9 @@ angular.module('meusServicos', ['ngResource'])
 	});
 })
 // $q nos permite criar nossas próprias promisses
-.factory('cadastroDeFotos', function(recursoFoto, $q){
+.factory('cadastroDeFotos', function(recursoFoto, $q, $rootScope){
 	var servico = {};
+	var evento = 'fotoCadastrada';
 	servico.cadastrar = function(foto){
 		// o parametro resolve é uma função que será executada quando a promisse for resolvida com sucesso
 		// o parametro reject é uma funcção que será executada em caso de erro
@@ -25,6 +26,10 @@ angular.module('meusServicos', ['ngResource'])
 			// se não, estamos cadastrando uma foto nova
 			if (foto._id) {
 				recursoFoto.update({fotoId: foto._id}, foto, function(foto){
+					// quando uma foto for cadastrada, disparamos o evento chamado fotoCadastrada
+					// não podemos utilizar $scope na diretiva, pois não temos acesso (e nem devemos ter) a ele
+					// por isso, devemos utilizar o $rootScope que é o scope pai de todos os controllers no Angular
+					$rootScope.$broadcast(evento);
 					resolve({
 						mensagem: 'Foto ' + foto.titulo + ' foi alterada com sucesso!',
 						inclusao: false
@@ -37,6 +42,7 @@ angular.module('meusServicos', ['ngResource'])
 				});
 			} else{
 				recursoFoto.save(foto, function(foto){
+					$rootScope.$broadcast(evento);
 					resolve({
 						mensagem: 'Foto ' + foto.titulo + ' incluída com sucesso!',
 						inclusao: true
