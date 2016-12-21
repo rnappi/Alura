@@ -6,27 +6,40 @@ using System.Threading.Tasks;
 
 namespace CaixaEletronico
 {
-    class Conta
+    abstract class Conta
     {
-        public int numero;
-        public string titutlar;
-        public double saldo;
-        public Cliente cliente;
+        public int Numero { get; set; }
+        public Cliente Titular { get; set; }
+        public double Saldo { get; protected set; }
 
-        public void Saca(double ValorASerSacado)
+        public void Deposita(double valorASerDepositado)
         {
-            this.saldo -= ValorASerSacado;
+            if (valorASerDepositado > 0)
+            {
+                this.Saldo += valorASerDepositado;
+            }
         }
 
-        public void Deposita(double ValorASerDepositado)
-        {
-            this.saldo += ValorASerDepositado;
-        }
+        public abstract void Saca(double valorASerSacado);
 
         public void Transfere(double valor, Conta destino)
         {
             this.Saca(valor);
             destino.Deposita(valor);
+        }
+
+        public double CalculaRendimentoAnual()
+        {
+            double saldoNaqueleMes = this.Saldo;
+
+            for (int i = 0; i < 12; i++)
+            {
+                saldoNaqueleMes = saldoNaqueleMes * 1.007;
+            }
+
+            double rendimento = saldoNaqueleMes - this.Saldo;
+
+            return rendimento;
         }
     }
 }
