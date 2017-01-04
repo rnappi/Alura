@@ -127,7 +127,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseContext.cs" />
+    <Compile Include="CategoriaDAO.cs" />
+    <Compile Include="IBaseContext.cs" />
     <Compile Include="EntidadesContext.cs" />
+    <Compile Include="Entidades\Categoria.cs" />
+    <Compile Include="Entidades\Produto.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="LojaComEntityDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -138,7 +143,12 @@
     <Compile Include="Migrations\20161229005359_CriaUsuario.designer.cs">
       <DependentUpon>20161229005359_CriaUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170102232153_CriarProdutoECategoria.cs" />
+    <Compile Include="Migrations\20170102232153_CriarProdutoECategoria.designer.cs">
+      <DependentUpon>20170102232153_CriarProdutoECategoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\EntidadesContextModelSnapshot.cs" />
+    <Compile Include="ProdutoDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -146,6 +156,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

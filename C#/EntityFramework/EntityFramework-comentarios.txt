@@ -1,0 +1,41 @@
+EntityFramework
+
+O Entity Framework centraliza o acesso aos dados no banco, para utilizá-lo devemos:
+
+1 - Instalar o Entity Framework no projeto
+
+2 - Instalar os o pacote de comandos (commands) para que possamos usar o migrations
+
+3 - Devemos criar as entidades do nosso programa (sempre com permissão de acesso public para que o EF tenha acesso as propriedades)
+
+4 - Precisamos criar uma clase que herda de DbContext para configurar o EF e informar quais entidades devem ser mapeadas através de propriedades publicas.
+Exemplo: public DbSet<Usuario> Usuarios (informa ao EF que a entidade Usuario deve sermapeada e representa a lista de todos os Usuarios cadastrados no banco)
+
+5 - Precisamos sobreescrever o metodo OnConfiguring para informar ao EF qual banco de dados utilizaremos e qual a string de conexão
+
+6 - Para que o banco de dados seja atualizado com as novas tabelas/entidades, devemos utilizamo migrations. Add-Migrations nomeDaMigracao, update-database
+
+
+Operações com Entidades
+
+1 - Para adicionar um novo usuario no banco, devemos utilizar o metodo Add do DBSet declarado no arquivo de Configuração do Entity. Além disso, devemos utilizar o metodo SaveChanges para salvar as alterações no banco e o Dispose para fechar a conexão. Exemplo:
+Contexto.Usuarios.Add(novoUsuario);
+Contexto.SaveChanges();
+Contexto.Dispose();
+
+2 - Para remover um registro do banco, devemos utilizar o metodo Remove();
+
+3 - Para alterar um elemento do banco de dados, devemos atualizar os atributos necessários da referencia para o objeto vindo do EF e utilizar o metodo SaveChanges();
+Vale lembrar que o EF gerencia o estado de todos os objetos vindos do banco de dados (unchanged, modified, added e deleted). Graças a estes estados, o EF sabe exatamento quais registros devem ser alterardos no banco (ele desconsidera os registros com status = unchanged)
+
+
+
+Relacionamento entre Entidades
+
+Devemos utilizar um prop virtual nas entidades para criar o relacionamento (Navigation Properties) e informar qual o campo será utilizado para gerar a FK
+
+A Navigation Property representa o relacionamento entre as entidades e essa propriedade deve ser declarada como virtual para que o EF consiga sobreescreve-la
+
+
+rio grande do sul 247
+4223-5500
