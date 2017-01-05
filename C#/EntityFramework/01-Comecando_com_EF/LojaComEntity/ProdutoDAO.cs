@@ -28,5 +28,35 @@ namespace LojaComEntity
             Context.Produtos.Add(produto);
             Context.SaveChanges();
         }
+
+        public IList<Produto> ListarProdutos()
+        {
+            var busca = from p in Context.Produtos
+                        where p.Categoria.Nome == "Roupa" 
+                        && p.Preco > 20
+                        orderby p.Nome
+                        select p;
+
+            return busca.ToList();
+        }
+
+        public IList<Produto> BuscaPorPrecoNomeCategoria(string nome, decimal preco, string categoria)
+        {
+            var busca = from p in Context.Produtos
+                        select p;
+
+            if (!String.IsNullOrWhiteSpace(nome))
+                busca = busca.Where(p => p.Nome == nome);
+
+            if (preco > 0)
+                busca = busca.Where(p => p.Preco == preco);
+
+            if (!String.IsNullOrWhiteSpace(categoria))
+                busca = busca.Where(p => p.Categoria.Nome == categoria);
+
+            // o EF monta a query dinamicamente com base nos resultados dos if´s
+            // a query só é executada quando chamamos o .ToList()
+            return busca.ToList(); 
+        }
     }
 }

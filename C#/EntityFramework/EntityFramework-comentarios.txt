@@ -1,4 +1,4 @@
-EntityFramework
+﻿EntityFramework
 
 O Entity Framework centraliza o acesso aos dados no banco, para utilizá-lo devemos:
 
@@ -35,6 +35,22 @@ Relacionamento entre Entidades
 Devemos utilizar um prop virtual nas entidades para criar o relacionamento (Navigation Properties) e informar qual o campo será utilizado para gerar a FK
 
 A Navigation Property representa o relacionamento entre as entidades e essa propriedade deve ser declarada como virtual para que o EF consiga sobreescreve-la
+
+
+
+Recuperando Dados
+
+Podemos realizar buscas no banco utilizando Linq
+
+Com o Linq podemos referenciar nossos objetos e não as tabelas do banco. Além disso, não precisamos nos preocupar com os detalhes do SQL que varia de banco para banco
+
+
+
+Consultas Dinâmicas com Linq
+
+Todas vez que criamos uma consulta usando LINQ ela só é executada quando chamamos o método ToList<>(); ou quando executamos um foreach na busca, isso nos permite editar a consulta diversas vezes antes de percorrer.
+
+Quando adicionamos um if dentro do foreach as verificações são executadas depois da query trazer todos os registros do banco o que causaria uma perca de performance, quando adicionamos o where no LINQ a consulta já traz os resultados filtrados direto do banco.
 
 
 rio grande do sul 247

@@ -24,7 +24,13 @@ namespace LojaComEntity
             // gnora todas que estiverem com status = unchanged
             dao.SaveChanges();*/
 
-            
+            ProdutoDAO dao = new ProdutoDAO();
+            var resultado = dao.ListarProdutos();
+            foreach (var p in resultado)
+            {
+                Console.WriteLine(p.Nome + " - " + p.Preco);
+            }
+            Console.ReadLine();
         }
 
         private void CriarCategoria()
