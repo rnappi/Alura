@@ -53,5 +53,19 @@ Todas vez que criamos uma consulta usando LINQ ela só é executada quando chama
 Quando adicionamos um if dentro do foreach as verificações são executadas depois da query trazer todos os registros do banco o que causaria uma perca de performance, quando adicionamos o where no LINQ a consulta já traz os resultados filtrados direto do banco.
 
 
+
+Relacionamento Many to Many e Include
+
+Navigation Property sempre precisa ser declarada como vurtual
+
+Além de criar uma lista dentro de cada uma das entidades do relacionamento, precisamos criar uma nova entidade que representa a tabela associativa que será criada pelo EF
+
+Nesta entidade de associação, devemos criar uma chave composta para que a chave primária seja criada utilizando os id's da associação
+
+Para criar a chave composta, precisar dar um override no metodo OnModelCreating e informar quais sao as chaves utilizadas para gerar a PK da entidade associativa
+
+
+
+
 rio grande do sul 247
 4223-5500

@@ -20,5 +20,9 @@ namespace LojaComEntity.Entidades
 
         // informamos ao EF qual a propriedade da categpria será utilizada para gerar a FK no banco
         public int CategoriaID { get; set; }
+
+        // navigation property sempre como virtual
+        // representa em quais vendas o produto está vinculado
+        public virtual IList<ProdutoVenda> ProdutoVenda { get; set; }
     }
 }
