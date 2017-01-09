@@ -17,5 +17,10 @@ namespace LojaComEntity.Entidades
         // representa os produtos que fazem parte da venda
         // asumimos que uma venda pode ter vários produtos
         public virtual IList<ProdutoVenda> Produtovenda { get; set; }
+
+        public Venda()
+        {
+            Produtovenda = new List<ProdutoVenda>();
+        }
     }
 }

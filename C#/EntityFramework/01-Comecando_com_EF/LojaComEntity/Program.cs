@@ -24,12 +24,14 @@ namespace LojaComEntity
             // gnora todas que estiverem com status = unchanged
             dao.SaveChanges();*/
 
-            ProdutoDAO dao = new ProdutoDAO();
-            var resultado = dao.ListarProdutos();
-            foreach (var p in resultado)
+            var vendaDAO = new VendaDAO();
+            var venda = vendaDAO.BuscarPorId(1);
+
+            foreach (var pv in venda.Produtovenda)
             {
-                Console.WriteLine(p.Nome + " - " + p.Preco);
+                Console.WriteLine(pv.Produto.Nome);
             }
+
             Console.ReadLine();
         }
 
@@ -77,6 +79,41 @@ namespace LojaComEntity
                 Console.WriteLine(p.Nome);
             }
             Console.ReadLine();
+        }
+
+        private void CadastraVenda()
+        {
+            UsuarioDAO userDAO = new UsuarioDAO();
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            VendaDAO vendaDAO = new VendaDAO();
+            ProdutoVendaDAO pvDAO = new ProdutoVendaDAO();
+            Usuario user = userDAO.BuscarPorId(1);
+            Venda venda = new Venda()
+            {
+                Cliente = user
+            };
+            vendaDAO.Salva(venda);
+
+            Produto prod1 = produtoDAO.BuscarPorId(1);
+            Produto prod2 = produtoDAO.BuscarPorId(2);
+
+            ProdutoVenda pv1 = new ProdutoVenda()
+            {
+                Venda = venda,
+                Produto = prod1
+            };
+            pvDAO.Salva(pv1);
+
+            ProdutoVenda pv2 = new ProdutoVenda()
+            {
+                Venda = venda,
+                Produto = prod2
+            };
+            pvDAO.Salva(pv2);
+
+            // salva as alteracoes
+            pvDAO.SaveChanges();
+
         }
     }
 }

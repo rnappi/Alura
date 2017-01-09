@@ -129,6 +129,8 @@
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
     <Compile Include="CategoriaDAO.cs" />
+    <Compile Include="Entidades\ProdutoVenda.cs" />
+    <Compile Include="Entidades\Venda.cs" />
     <Compile Include="IBaseContext.cs" />
     <Compile Include="EntidadesContext.cs" />
     <Compile Include="Entidades\Categoria.cs" />
@@ -147,8 +149,13 @@
     <Compile Include="Migrations\20170102232153_CriarProdutoECategoria.designer.cs">
       <DependentUpon>20170102232153_CriarProdutoECategoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20170107012413_CriarVenda.cs" />
+    <Compile Include="Migrations\20170107012413_CriarVenda.designer.cs">
+      <DependentUpon>20170107012413_CriarVenda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\EntidadesContextModelSnapshot.cs" />
     <Compile Include="ProdutoDAO.cs" />
+    <Compile Include="ProdutoVendaDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -157,6 +164,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="UsuarioDAO.cs" />
+    <Compile Include="VendaDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
